@@ -1,6 +1,9 @@
 import { PickType } from '@nestjs/mapped-types';
+import { GENDER } from '@prisma/client';
+
 import {
   IsEmail,
+  IsIn,
   IsNotEmpty,
   IsPhoneNumber,
   IsString,
@@ -10,15 +13,7 @@ import {
 export class SignUpDTO {
   @IsNotEmpty()
   @IsString()
-  firstName: string;
-
-  @IsNotEmpty()
-  @IsString()
-  lastName: string;
-
-  @IsNotEmpty()
-  @IsString()
-  region: string;
+  name: string;
 
   @IsNotEmpty()
   @IsPhoneNumber()
@@ -27,6 +22,10 @@ export class SignUpDTO {
   @IsNotEmpty()
   @IsEmail()
   email: string;
+
+  @IsNotEmpty()
+  @IsIn(Object.values(GENDER))
+  gender: GENDER;
 
   @IsNotEmpty()
   @MinLength(6)
